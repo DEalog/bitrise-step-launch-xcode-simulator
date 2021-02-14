@@ -66,15 +66,15 @@ toolkit:
 inputs:
   - simctl_command: boot
     opts:
-      title: "boot or shutdown"
-      summary: This function let's you boot or shutdown your desired device
+      title: "boot, shutdown, erase or privacy"
+      summary: This function let's you execute the desired simctl command for your desired device
       description: |
         Description of this input.
 
         Can be Markdown formatted text.
       is_expand: true
       is_required: true
-      value_options: [boot, shutdown]
+      value_options: [boot, shutdown, erase, privacy]
   - simctl_device: 
       opts:
         title: "simulator device"
@@ -89,4 +89,55 @@ inputs:
         is_expand: true
         is_required: true
         value_options: []
+  - BITRISE_SIMCTL_ACTION: grant
+    opts:
+      title: "grant, revoke or reset"
+      summary: This function let's you specify the action of the permission
+      description: |
+         The action to take:
+                 grant - Grant access without prompting. Requires bundle identifier.
+                 revoke - Revoke access, denying all use of the service. Requires bundle identifier.
+                 reset - Reset access, prompting on next use. Bundle identifier optional.
+      is_expand: true
+      is_required: false
+      value_options: [grant, revoke, reset]
+  - BITRISE_SIMCTL_SERVICE: all
+    opts:
+      title: "permission services"
+      summary: This function let's you specify the service of the permission action
+      description: |
+             The service:
+                 all - Apply the action to all services.
+                 calendar - Allow access to calendar.
+                 contacts-limited - Allow access to basic contact info.
+                 contacts - Allow access to full contact details.
+                 location - Allow access to location services when app is in use.
+                 location-always - Allow access to location services at all times.
+                 photos-add - Allow adding photos to the photo library.
+                 photos - Allow full access to the photo library.
+                 media-library - Allow access to the media library.
+                 microphone - Allow access to audio input.
+                 motion - Allow access to motion and fitness data.
+                 reminders - Allow access to reminders.
+                 siri - Allow use of the app with Siri.
+      is_expand: true
+      is_required: false
+      value_options: [all, calendar, contacts-limited, contacts, location,
+                      location-always, photos-add, photos, media-library, microphone, motion, reminders, siri]
+  - BITRISE_IOS_BUNDLE_ID:
+    opts:
+        title: "Bundle ID"
+        summary: Set the bundle id from info.plist
+        description: 
+
+        is_expand: true
+        is_required: false
+        value_options: []      
 outputs:
+  - BITRISE_SIMCTL_PREVIOUS_DEVICE_ID: 
+    opts:
+      title: Device ID for further simulator steps
+        
+  - BITRISE_SIMCTL_PREVIOUS_DEVICE_NAME: 
+    opts:
+      title: Device name for further simulator steps
