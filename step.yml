@@ -75,9 +75,9 @@ inputs:
       is_expand: true
       is_required: true
       value_options: [boot, shutdown, erase, privacy]
-  - simctl_device: 
+  - simctl_device:
       opts:
-        title: "simulator device"
+        title: "Simulator device e.g. iphone 8 or iphone 11"
         summary: Choose your simulator device
         description: |
           you can check for your xcode version 
@@ -87,8 +87,7 @@ inputs:
           or run the step once, we will list the devices in the logs
           e.g. iphone 8
         is_expand: true
-        is_required: true
-        value_options: []
+        is_required: false
   - BITRISE_SIMCTL_ACTION: grant
     opts:
       title: "grant, revoke or reset"
@@ -126,13 +125,15 @@ inputs:
                       location-always, photos-add, photos, media-library, microphone, motion, reminders, siri]
   - BITRISE_IOS_BUNDLE_ID:
     opts:
-        title: "Bundle ID"
-        summary: Set the bundle id from info.plist
-        description: 
-
+        title: "Bundle ID e.g. com.pied.piper.app"
+        summary: Bundle id
+        description: |
+          you can check for your bundle identifier within the info.plist
+          ```
+          e.g. com.pied.piper.app
+          ```
         is_expand: true
-        is_required: false
-        value_options: []      
+        is_required: false 
 outputs:
   - BITRISE_SIMCTL_PREVIOUS_DEVICE_ID: 
     opts:
